@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FreshBasket | Fruits & Vegetables</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--green:#218739;--light:#f4fbf3;--dark:#17351d;--orange:#f49b24;--muted:#66736a}
+body{font-family:Arial,Helvetica,sans-serif;background:var(--light);color:var(--dark);line-height:1.5}
+header{position:sticky;top:0;z-index:20;background:#fff;box-shadow:0 2px 12px #0001}
+.nav{max-width:1150px;margin:auto;padding:15px 20px;display:flex;align-items:center;justify-content:space-between;gap:15px}
+.logo{font-size:24px;font-weight:800;color:var(--green)}.logo span{color:var(--orange)}
+nav{display:flex;gap:7px;flex-wrap:wrap;justify-content:center}
+nav button,.btn{border:0;border-radius:22px;padding:10px 15px;background:transparent;color:var(--dark);cursor:pointer;font-weight:600}
+nav button:hover,.active{background:#e9f7e8!important;color:var(--green)!important}
+.cart{background:var(--green)!important;color:#fff!important}
+.page{display:none;min-height:calc(100vh - 72px);padding:45px 20px}
+.page.active-page{display:block}
+.container{max-width:1150px;margin:auto}
+.hero{min-height:calc(100vh - 72px);display:grid;grid-template-columns:1.05fr .95fr;align-items:center;gap:35px}
+.hero h1{font-size:clamp(42px,6vw,74px);line-height:1.02;margin:15px 0}
+.hero p{font-size:19px;color:var(--muted);max-width:600px}
+.hero img{width:100%;height:500px;object-fit:cover;border-radius:30px;box-shadow:0 20px 45px #174d1d22}
+.badge{display:inline-block;background:#fff0d8;color:#a15d00;padding:7px 12px;border-radius:20px;font-weight:700}
+h2{text-align:center;font-size:40px;margin-bottom:10px}.sub{text-align:center;color:var(--muted);margin-bottom:30px}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.card{background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 7px 22px #164d1c12;transition:.2s}
+.card:hover{transform:translateY(-4px)}
+.card img{width:100%;height:180px;object-fit:cover}.card-body{padding:15px}
+.card h3{font-size:19px}.price{color:var(--green);font-size:20px;font-weight:800;margin:7px 0}
+.add{width:100%;background:var(--green);color:#fff;border:0;padding:10px;border-radius:10px;cursor:pointer;font-weight:700}
+.category{display:flex;gap:15px;justify-content:center;margin-bottom:30px;flex-wrap:wrap}.category button{padding:10px 18px;border:1px solid #cfe2d0;background:white;border-radius:25px;cursor:pointer}
+.about{display:grid;grid-template-columns:1fr 1fr;gap:35px;align-items:center}.about img{width:100%;height:430px;object-fit:cover;border-radius:25px}
+.info{background:#fff;padding:28px;border-radius:20px;box-shadow:0 8px 25px #0000000d}.info h3{margin-bottom:10px}.info p{color:var(--muted);margin-bottom:12px}
+form{max-width:650px;margin:auto;background:#fff;padding:30px;border-radius:20px;box-shadow:0 8px 25px #0001}
+input,textarea,select{width:100%;padding:13px;margin:8px 0 15px;border:1px solid #ccd9ce;border-radius:10px;font:inherit}
+textarea{height:120px;resize:vertical}
+footer{text-align:center;padding:25px;background:#17351d;color:#fff}
+.cartbox{max-width:800px;margin:auto;background:#fff;padding:25px;border-radius:20px}
+.cartrow{display:flex;align-items:center;justify-content:space-between;padding:13px 0;border-bottom:1px solid #eee;gap:15px}
+.total{font-size:25px;font-weight:800;text-align:right;margin-top:20px;color:var(--green)}
+.empty{text-align:center;color:var(--muted);padding:40px}
+.notice{padding:15px;background:#e8f7e8;border-radius:12px;margin-bottom:20px}
+@media(max-width:850px){.hero,.about{grid-template-columns:1fr}.hero img{height:330px}.grid{grid-template-columns:repeat(2,1fr)}nav{display:none}}
+@media(max-width:520px){.grid{grid-template-columns:1fr}.page{padding:30px 14px}.hero h1{font-size:45px}.nav{padding:12px 14px}}
+</style>
+</head>
+<body>
+<header><div class="nav">
+<div class="logo">Fresh<span>Basket</span> 🥬</div>
+<nav>
+<button onclick="showPage('home')" class="active">Home</button>
+<button onclick="showPage('fruits')">Fruits</button>
+<button onclick="showPage('vegetables')">Vegetables</button>
+<button onclick="showPage('offers')">Offers</button>
+<button onclick="showPage('about')">About</button>
+<button onclick="showPage('delivery')">Delivery</button>
+<button onclick="showPage('contact')">Contact</button>
+<button onclick="showPage('cart')" class="cart">🛒 Cart <span id="count">0</span></button>
+</nav>
+</div></header>
+
+<section id="home" class="page active-page">
+<div class="container hero">
+<div><span class="badge">Fresh every day</span><h1>Healthy food,<br><span style="color:var(--green)">delivered fresh.</span></h1>
+<p>Shop farm-fresh fruits and vegetables with simple prices and convenient home delivery.</p>
+<button class="btn" style="background:var(--green);color:#fff;margin-top:25px;padding:14px 22px" onclick="showPage('fruits')">Shop Fresh Produce →</button></div>
+<img src="https://images.unsplash.com/photo-1610832958506-aa56368176cf?auto=format&fit=crop&w=1000&q=85" alt="Fresh fruits and vegetables">
+</div></section>
+
+<section id="fruits" class="page"><div class="container">
+<h2>Fresh Fruits 🍎</h2><div class="notice" style="max-width:500px;margin:0 auto 25px;text-align:center"><b>15 fresh fruit items</b> available</div><p class="sub">Naturally sweet, colourful and carefully selected.</p>
+<div class="grid"><div class="card"><img src="https://images.unsplash.com/photo-1579613832125-5d34a13ffe2a?auto=format&fit=crop&w=600&q=80" alt="Red Apples"><div class="card-body"><h3>Red Apples</h3><div class="price">₹160 / kg</div><button class="add" onclick="add('Red Apples',160)">Add to cart</button></div></div><div class="card"><img src="https://images.unsplash.com/photo-1553279768-865429fa0078?auto=format&fit=crop&w=600&q=80" alt="Alphonso Mango"><div class="card-body"><h3>Alphonso Mango</h3><div class="price">₹180 / kg</div><button class="add" onclick="add('Alphonso Mango',180)">Add to cart</button></div></div><div class="card"><img src="https://images.unsplash.com/photo-1587334206596-c0f9f07fb3a9?auto=format&fit=crop&w=600&q=80" alt="Bananas"><div class="card-body"><h3>Bananas</h3><div class="price">₹60 / dozen</div><button class="add" onclick="add('Bananas',60)">Add to cart</button></div></div><div class="card"><img src="https://images.unsplash.com/photo-1599819177626-0f3f8d8b4b1d?auto=format&fit=crop&w=600&q=80" alt="Fresh Grapes"><div class="card-body"><h3>Fresh Grapes</h3><div class="price">₹120 / kg</div><button class="add" onclick="add('Fresh Grapes',120)">Add to cart</button></div></div><div class="card"><img src="https://images.unsplash.com/photo-1547514701-42782101795e?auto=format&fit=crop&w=600&q=80" alt="Oranges"><div class="card-body"><h3>Oranges</h3><div class="price">₹130 / kg</div><button class="add" onclick="add('Oranges',130)">Add to cart</button></div></div><div class="card"><img src="https://images.unsplash.com/photo-1550258987-190a2d41a8ba?auto=format&fit=crop&w=600&q=80" alt="Pineapple"><div class="card-body"><h3>Pineapple</h3><div class="price">₹80 / piece</div><button class="add" onclick="add('Pineapple',80)">Add to cart</button></div></div><div class="card"><img src="https://images.unsplash.com/photo-1563114773-84221bd62daa?auto=format&fit=crop&w=600&q=80" alt="Watermelon"><div class="card-body"><h3>Watermelon</h3><div class="price">₹55 / kg</div><button class="add" onclick="add('Watermelon',55)">Add to cart</button></div></div><div class="card"><img src="https://images.unsplash.com/photo-1526318472351-c75fcf070305?auto=format&fit=crop&w=600&q=80" alt="Papaya"><div class="card-body"><h3>Papaya</h3><div class="price">₹70 / kg</div><button class="add" onclick="add('Papaya',70)">Add to cart</button></div></div><div class="card"><img src="https://images.unsplash.com/photo-1464965911861-746a04b4bca6?auto=format&fit=crop&w=600&q=80" alt="Strawberries"><div class="card-body"><h3>Strawberries</h3><div class="price">₹240 / 500g</div><button class="add" onclick="add('Strawberries',240)">Add to cart</button></div></div><div class="card"><img src="https://images.unsplash.com/photo-1541344999736-83eca272f6fc?auto=format&fit=crop&w=600&q=80" alt="Pomegranate"><div class="card-body"><h3>Pomegranate</h3><div class="price">₹180 / kg</div><button class="add" onclick="add('Pomegranate',180)">Add to cart</button></div></div><div class="card"><img src="https://images.unsplash.com/photo-1585059895524-72359e06133a?auto=format&fit=crop&w=600&q=80" alt="Kiwi"><div class="card-body"><h3>Kiwi</h3><div class="price">₹260 / kg</div><button class="add" onclick="add('Kiwi',260)">Add to cart</button></div></div><div class="card"><img src="https://images.unsplash.com/photo-1536511132770-e5058c7e8c46?auto=format&fit=crop&w=600&q=80" alt="Guava"><div class="card-body"><h3>Guava</h3><div class="price">₹90 / kg</div><button class="add" onclick="add('Guava',90)">Add to cart</button></div></div><div class="card"><img src="https://images.unsplash.com/photo-1527325678964-54921661f888?auto=format&fit=crop&w=600&q=80" alt="Dragon Fruit"><div class="card-body"><h3>Dragon Fruit</h3><div class="price">₹220 / kg</div><button class="add" onclick="add('Dragon Fruit',220)">Add to cart</button></div></div><div class="card"><img src="https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?auto=format&fit=crop&w=600&q=80" alt="Green Apples"><div class="card-body"><h3>Green Apples</h3><div class="price">₹190 / kg</div><button class="add" onclick="add('Green Apples',190)">Add to cart</button></div></div><div class="card"><img src="https://images.unsplash.com/photo-1571575173700-afb9492e6a50?auto=format&fit=crop&w=600&q=80" alt="Muskmelon"><div class="card-body"><h3>Muskmelon</h3><div class="price">₹75 / kg</div><button class="add" onclick="add('Muskmelon',75)">Add to cart</button></div></div></div></div></section>
+
+<section id="vegetables" class="page"><div class="container">
+<h2>Farm Vegetables 🥕</h2><div class="notice" style="max-width:500px;margin:0 auto 25px;text-align:center"><b>15 fresh vegetable items</b> available</div><p class="sub">Crisp vegetables for everyday cooking.</p>
+<div class="grid"><div class="card"><img src="https://images.unsplash.com/photo-1592924357228-91a4daadcfea?auto=format&fit=crop&w=600&q=80" alt="Tomatoes"><div class="card-body"><h3>Tomatoes</h3><div class="price">₹50 / kg</div><button class="add" onclick="add('Tomatoes',50)">Add to cart</button></div></div><div class="card"><img src="https://images.unsplash.com/photo-1447175008436-054170c2e979?auto=format&fit=crop&w=600&q=80" alt="Carrots"><div class="card-body"><h3>Carrots</h3><div class="price">₹70 / kg</div><button class="add" onclick="add('Carrots',70)">Add to cart</button></div></div><div class="card"><img src="https://images.unsplash.com/photo-1566385101042-1a0aa0c1268c?auto=format&fit=crop&w=600&q=80" alt="Broccoli"><div class="card-body"><h3>Broccoli</h3><div class="price">₹100 / kg</div><button class="add" onclick="add('Broccoli',100)">Add to cart</button></div></div><div class="card"><img src="https://images.unsplash.com/photo-1563565375-f3fdfdbefa83?auto=format&fit=crop&w=600&q=80" alt="Capsicum"><div class="card-body"><h3>Capsicum</h3><div class="price">₹90 / kg</div><button class="add" onclick="add('Capsicum',90)">Add to cart</button></div></div><div class="card"><img src="https://images.unsplash.com/photo-1518977676601-b53f82aba655?auto=format&fit=crop&w=600&q=80" alt="Potatoes"><div class="card-body"><h3>Potatoes</h3><div class="price">₹40 / kg</div><button class="add" onclick="add('Potatoes',40)">Add to cart</button></div></div><div class="card"><img src="https://images.unsplash.com/photo-1508747703725-719777637510?auto=format&fit=crop&w=600&q=80" alt="Onions"><div class="card-body"><h3>Onions</h3><div class="price">₹45 / kg</div><button class="add" onclick="add('Onions',45)">Add to cart</button></div></div><div class="card"><img src="https://images.unsplash.com/photo-1576045057995-568f588f82fb?auto=format&fit=crop&w=600&q=80" alt="Spinach"><div class="card-body"><h3>Spinach</h3><div class="price">₹35 / bunch</div><button class="add" onclick="add('Spinach',35)">Add to cart</button></div></div><div class="card"><img src="https://images.unsplash.com/photo-1568584711075-3d021a7c3ca3?auto=format&fit=crop&w=600&q=80" alt="Cauliflower"><div class="card-body"><h3>Cauliflower</h3><div class="price">₹65 / kg</div><button class="add" onclick="add('Cauliflower',65)">Add to cart</button></div></div><div class="card"><img src="https://images.unsplash.com/photo-1604977042946-1eecc30f269e?auto=format&fit=crop&w=600&q=80" alt="Cucumber"><div class="card-body"><h3>Cucumber</h3><div class="price">₹55 / kg</div><button class="add" onclick="add('Cucumber',55)">Add to cart</button></div></div><div class="card"><img src="https://images.unsplash.com/photo-1610557892470-a0b2f7f7d1b5?auto=format&fit=crop&w=600&q=80" alt="Brinjal"><div class="card-body"><h3>Brinjal</h3><div class="price">₹60 / kg</div><button class="add" onclick="add('Brinjal',60)">Add to cart</button></div></div><div class="card"><img src="https://images.unsplash.com/photo-1593032465175-481ac7f401a0?auto=format&fit=crop&w=600&q=80" alt="Beetroot"><div class="card-body"><h3>Beetroot</h3><div class="price">₹70 / kg</div><button class="add" onclick="add('Beetroot',70)">Add to cart</button></div></div><div class="card"><img src="https://images.unsplash.com/photo-1567375698348-5d9d5ae99de1?auto=format&fit=crop&w=600&q=80" alt="Green Beans"><div class="card-body"><h3>Green Beans</h3><div class="price">₹80 / kg</div><button class="add" onclick="add('Green Beans',80)">Add to cart</button></div></div><div class="card"><img src="https://images.unsplash.com/photo-1587735243615-c03f25aaff15?auto=format&fit=crop&w=600&q=80" alt="Peas"><div class="card-body"><h3>Peas</h3><div class="price">₹110 / kg</div><button class="add" onclick="add('Peas',110)">Add to cart</button></div></div><div class="card"><img src="https://images.unsplash.com/photo-1622205313162-be1d5712a43c?auto=format&fit=crop&w=600&q=80" alt="Lady Finger"><div class="card-body"><h3>Lady Finger</h3><div class="price">₹75 / kg</div><button class="add" onclick="add('Lady Finger',75)">Add to cart</button></div></div><div class="card"><img src="https://images.unsplash.com/photo-1551754655-cd27e38d2076?auto=format&fit=crop&w=600&q=80" alt="Sweet Corn"><div class="card-body"><h3>Sweet Corn</h3><div class="price">₹90 / 4 pcs</div><button class="add" onclick="add('Sweet Corn',90)">Add to cart</button></div></div></div></div></section>
+
+<section id="offers" class="page"><div class="container">
+<h2>Today's Offers 🎉</h2><p class="sub">Save more on selected fresh produce.</p>
+<div class="grid">
+<div class="card"><img src="https://images.unsplash.com/photo-1518977676601-b53f82aba655?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Potato Family Pack</h3><div><s>₹80</s> <b class="price">₹60 / 2 kg</b></div><button class="add" onclick="add('Potato Family Pack',60)">Add to cart</button></div></div>
+<div class="card"><img src="https://images.unsplash.com/photo-1550258987-190a2d41a8ba?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Pineapple</h3><div><s>₹100</s> <b class="price">₹80 / piece</b></div><button class="add" onclick="add('Pineapple',80)">Add to cart</button></div></div>
+<div class="card"><img src="https://images.unsplash.com/photo-1587049352846-4a222e784d38?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Orange Pack</h3><div><s>₹160</s> <b class="price">₹130 / kg</b></div><button class="add" onclick="add('Orange Pack',130)">Add to cart</button></div></div>
+<div class="card"><img src="https://images.unsplash.com/photo-1547514701-42782101795e?auto=format&fit=crop&w=600&q=80"><div class="card-body"><h3>Lemon Pack</h3><div><s>₹60</s> <b class="price">₹45 / 500g</b></div><button class="add" onclick="add('Lemon Pack',45)">Add to cart</button></div></div>
+</div></div></section>
+
+<section id="about" class="page"><div class="container about">
+<img src="https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=900&q=85" alt="Fresh market">
+<div class="info"><h2 style="text-align:left;font-size:36px">About FreshBasket</h2>
+<p>FreshBasket is a sample online grocery store designed for easy ordering of fresh fruits and vegetables.</p>
+<p>We focus on quality produce, clear pricing and a friendly shopping experience.</p>
+<div class="notice"><b>Fresh promise:</b> Every item shown here has a clear price before you add it to your cart.</div>
+<h3>Why shop with us?</h3><p>✓ Fresh produce &nbsp; ✓ Simple prices &nbsp; ✓ Easy ordering</p></div>
+</div></section>
+
+<section id="delivery" class="page"><div class="container">
+<h2>Delivery Information 🚚</h2><p class="sub">Simple, convenient delivery for your everyday groceries.</p>
+<div class="grid">
+<div class="info"><h3>📦 Order</h3><p>Add your favourite fruits and vegetables to the cart.</p></div>
+<div class="info"><h3>🏠 Address</h3><p>Enter your delivery address at checkout.</p></div>
+<div class="info"><h3>🚚 Delivery</h3><p>Choose a convenient delivery slot.</p></div>
+<div class="info"><h3>💳 Payment</h3><p>Pay securely using your preferred payment method.</p></div>
+</div></div></section>
+
+<section id="contact" class="page"><div class="container">
+<h2>Contact Us 📞</h2><p class="sub">Have a question? Send us a message.</p>
+<form onsubmit="event.preventDefault();alert('Thanks! Your message has been received.');this.reset()">
+<label>Name</label><input required placeholder="Your name">
+<label>Email</label><input type="email" required placeholder="you@example.com">
+<label>Message</label><textarea required placeholder="How can we help?"></textarea>
+<button class="add" type="submit">Send Message</button>
+</form></div></section>
+
+<section id="cart" class="page"><div class="container">
+<h2>Your Cart 🛒</h2><p class="sub">Review your selected fresh produce.</p>
+<div class="cartbox"><div id="cartItems" class="empty">Your cart is empty.</div><div id="total" class="total"></div>
+<button id="checkout" class="add" style="margin-top:20px;display:none" onclick="alert('Demo checkout: connect this button to your payment/order system.')">Proceed to Checkout</button></div>
+</div></section>
+
+<footer>© 2026 FreshBasket · Fresh fruits & vegetables for everyone</footer>
+
+<script>
+let cart=[];
+function showPage(id){
+ document.querySelectorAll('.page').forEach(p=>p.classList.remove('active-page'));
+ document.getElementById(id).classList.add('active-page');
+ document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
+ const btn=[...document.querySelectorAll('nav button')].find(b=>b.getAttribute('onclick')?.includes("'"+id+"'"));
+ if(btn)btn.classList.add('active');
+ window.scrollTo({top:0,behavior:'smooth'});
+ if(id==='cart')renderCart();
+}
+function add(name,price){
+ const item=cart.find(x=>x.name===name);
+ if(item)item.qty++; else cart.push({name,price,qty:1});
+ document.getElementById('count').textContent=cart.reduce((a,x)=>a+x.qty,0);
+ alert(name+' added to cart!');
+}
+function renderCart(){
+ const box=document.getElementById('cartItems'), total=document.getElementById('total'), checkout=document.getElementById('checkout');
+ if(!cart.length){box.className='empty';box.innerHTML='Your cart is empty.';total.textContent='';checkout.style.display='none';return}
+ box.className='';
+ box.innerHTML=cart.map((x,i)=>`<div class="cartrow"><div><b>${x.name}</b><br><small>₹${x.price} × ${x.qty}</small></div><div><b>₹${x.price*x.qty}</b> <button onclick="removeItem(${i})" style="border:0;background:#fee;color:#b33;padding:7px 10px;border-radius:8px;cursor:pointer">Remove</button></div></div>`).join('');
+ const sum=cart.reduce((a,x)=>a+x.price*x.qty,0);
+ total.textContent='Total: ₹'+sum;
+ checkout.style.display='block';
+}
+function removeItem(i){cart.splice(i,1);document.getElementById('count').textContent=cart.reduce((a,x)=>a+x.qty,0);renderCart()}
+</script>
+</body>
+</html>
